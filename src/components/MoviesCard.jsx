@@ -45,10 +45,15 @@ function MoviesCard() {
       <>
         {popularMovies.length === 0 && <div>Carregando...</div>}
         {popularMovies.length > 0 && popularMovies.map((ele)=>(
-            <div key={ele.id} className="w-full">
-                <img src={imagesURL + ele.poster_path} alt={ele.title} />
-                <h3>{ele.title}</h3>
-                <p>{mapGenresIdsToName(ele.genre_ids).join(', ')}</p>
+            <div key={ele.id} className="w-full flex flex-col gap-1">
+                <div className="relative">
+                    <img src={imagesURL + ele.poster_path} alt={ele.title} className="shadow-xl" />
+                    <div className="absolute -right-4 bottom-4 w-8 h-8 flex items-center justify-center rounded-full shadow-xl bg-gradient-to-t from-amber-500 to-yellow-400">
+                        <p className="text-sm font-medium text-white">{ele.vote_average.toFixed(1)}</p>
+                    </div>
+                </div>
+                <h3 className="text-base font-medium pt-1 text-white">{ele.title}</h3>
+                <p className="text-sm text-gray-300">{mapGenresIdsToName(ele.genre_ids).join(', ')}</p>
             </div>
         ))}
       </>

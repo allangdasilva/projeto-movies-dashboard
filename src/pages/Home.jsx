@@ -10,7 +10,7 @@ function Home() {
         <Navbar />
       </header>
       <main className="w-full max-w-7xl mx-auto">
-        <section className="w-full grid grid-cols-1 p-6 min-[320px]:grid-cols-2">
+        <section className="w-full grid grid-cols-1 gap-8 p-8 min-[380px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           <MoviesCard />
         </section>
       </main>
