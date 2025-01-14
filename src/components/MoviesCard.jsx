@@ -6,19 +6,19 @@ const moviesURL = import.meta.env.VITE_API
 const imagesURL = import.meta.env.VITE_IMG
 const genresURL = import.meta.env.VITE_GENRES
 
-function MoviesCard() {
-    const [popularMovies, setPopuplarMovies] = useState([])
+function MoviesCard({moviesEndpoint, query}) {
+    const [movies, setMovies] = useState([])
     const [genreMovies, setGenreMovies] = useState([])
 
     useEffect(()=>{
-        getPopularMovies()
+        getMovies()
         getGenresMovies()
-    },[])
+    },[query])
 
-    function getPopularMovies(){
-        axios.get(`${moviesURL}popular?language=pt-BR&${apiKey}`)
+    function getMovies(){
+        axios.get(moviesEndpoint)
         .then(response =>{
-            setPopuplarMovies(response.data.results)
+            setMovies(response.data.results)
             console.log(response.data)
         })
         .catch(error =>{
@@ -43,8 +43,8 @@ function MoviesCard() {
 
     return (
       <>
-        {popularMovies.length === 0 && <div>Carregando...</div>}
-        {popularMovies.length > 0 && popularMovies.map((ele)=>(
+        {movies.length === 0 && <div>Carregando...</div>}
+        {movies.length > 0 && movies.map((ele)=>(
             <div key={ele.id} className="w-full flex flex-col gap-1">
                 <div className="relative">
                     <img src={imagesURL + ele.poster_path} alt={ele.title} className="shadow-xl" />
