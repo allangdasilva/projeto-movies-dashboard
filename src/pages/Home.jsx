@@ -6,8 +6,14 @@ function Home() {
 
   return (
     <>
-      <Navbar />
-      <MoviesCard />
+      <header className="w-full max-w-7xl mx-auto">
+        <Navbar />
+      </header>
+      <main className="w-full max-w-7xl mx-auto">
+        <section className="w-full grid grid-cols-1 p-6 min-[320px]:grid-cols-2">
+          <MoviesCard />
+        </section>
+      </main>
     </>
   )
 }

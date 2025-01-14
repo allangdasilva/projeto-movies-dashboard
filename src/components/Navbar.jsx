@@ -6,16 +6,18 @@ function Navbar() {
 
   return (
     <>
-      <nav>
+      <nav className="w-full flex flex-col gap-4 justify-between items-center p-6 sm:flex-row sm:gap-0">
         <h2>
-            <Link>
-                <Popcorn color="#000" /> MoviesDash
+            <Link className="flex items-center gap-2 text-white">
+                <Popcorn color="#79D7BE" /> MoviesDash
             </Link>
         </h2>
-        <form>
-            <input type="text" placeholder="Buscar..." />
-            <button type="submit">
-                <Search color="#000" />
+        <form className="relative w-full max-w-60 flex items-center">
+            <input type="text" placeholder="Buscar..." 
+            className="w-full px-4 py-2 pr-10 rounded-3xl outline-none shadow-md" />
+            <button type="submit" 
+            className="absolute right-0 p-2">
+                <Search color="#79D7BE" />
             </button>
         </form>
       </nav>

@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    font-family: "Jost", serif;;
+}
+body {
+    background: linear-gradient(to right top, #283a46, #283a46, #283a46, #283a46, #283a46, #2e404c, #334651, #394c57, #475a65, #556872, #637781, #72868f);
+}
