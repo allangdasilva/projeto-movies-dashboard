@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import axios from "axios"
 import ApiServices from "../utils/ApiServices.jsx"
 
 const apiKey = import.meta.env.VITE_API_KEY
-const moviesURL = import.meta.env.VITE_API
 const imagesURL = import.meta.env.VITE_IMG
 const genresURL = import.meta.env.VITE_GENRES
 
@@ -21,7 +21,7 @@ function MoviesCard({moviesEndpoint, query}) {
         .then(response =>{
             setGenreMovies(response.data.genres)
         })
-        .catch(error => {
+        .catch(error =>{
             console.error(error)
         })
     }
@@ -38,7 +38,9 @@ function MoviesCard({moviesEndpoint, query}) {
         {movies.length > 0 && movies.map((ele)=>(
             <div key={ele.id} className="w-full flex flex-col gap-1">
                 <div className="relative">
-                    <img src={imagesURL + ele.poster_path} alt={ele.title} className="shadow-xl" />
+                    <Link to={`/movie/${ele.id}`}>
+                        <img src={imagesURL + ele.poster_path} alt={ele.title} className="shadow-xl" />
+                    </Link>
                     <div className="absolute -right-4 bottom-4 w-8 h-8 flex items-center justify-center rounded-full shadow-xl bg-gradient-to-t from-amber-500 to-yellow-400">
                         <p className="text-sm font-medium text-white">{ele.vote_average.toFixed(1)}</p>
                     </div>

@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import { Search } from "lucide-react"
-import { Popcorn } from "lucide-react"
+import { Search, Popcorn } from "lucide-react"
 import { useState } from "react"
 
 function Navbar() {
