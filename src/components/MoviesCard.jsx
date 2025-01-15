@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
+import ApiServices from "../utils/ApiServices.jsx"
 
 const apiKey = import.meta.env.VITE_API_KEY
 const moviesURL = import.meta.env.VITE_API
@@ -11,20 +12,10 @@ function MoviesCard({moviesEndpoint, query}) {
     const [genreMovies, setGenreMovies] = useState([])
 
     useEffect(()=>{
-        getMovies()
+        ApiServices(moviesEndpoint, setMovies)
         getGenresMovies()
     },[query])
 
-    function getMovies(){
-        axios.get(moviesEndpoint)
-        .then(response =>{
-            setMovies(response.data.results)
-            console.log(response.data)
-        })
-        .catch(error =>{
-            console.error(error)
-        })
-    }
     function getGenresMovies(){
         axios.get(`${genresURL}?language=pt-BR&${apiKey}`)
         .then(response =>{

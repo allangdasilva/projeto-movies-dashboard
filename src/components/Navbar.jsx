@@ -21,7 +21,7 @@ function Navbar() {
     <>
       <nav className="w-full flex flex-col gap-4 justify-between items-center p-8 sm:flex-row sm:gap-0">
         <h2>
-            <Link className="flex items-center gap-2 text-white">
+            <Link to='/' className="flex items-center gap-2 text-white">
                 <Popcorn color="#79D7BE" /> MoviesDash
             </Link>
         </h2>
