@@ -5,7 +5,7 @@ import ApiGenres from "../utils/ApiGenres.jsx"
 import ApiGenresMap from "../utils/ApiGenresMap.jsx"
 
 const apiKey = import.meta.env.VITE_API_KEY
-const imagesURL = import.meta.env.VITE_IMG
+const imagesURL = import.meta.env.VITE_IMG_POSTER
 const genresURL = import.meta.env.VITE_GENRES
 
 function MoviesCard({moviesEndpoint, query}) {
@@ -19,7 +19,11 @@ function MoviesCard({moviesEndpoint, query}) {
 
     return (
       <>
-        {movies.length === 0 && <div>Carregando...</div>}
+        {movies.length === 0 && 
+        <div className="absolute top-0 left-0 w-full min-h-screen flex items-center justify-center">
+            <div className="w-20 h-20 rounded-full border-t-2 border-teal-400 animate-spin"></div>
+        </div>
+        }
         {movies.length > 0 && movies.map((ele)=>(
             <div key={ele.id} className="w-full flex flex-col gap-1">
                 <div className="relative">
@@ -30,9 +34,11 @@ function MoviesCard({moviesEndpoint, query}) {
                         <p className="text-sm font-medium text-white">{ele.vote_average.toFixed(1)}</p>
                     </div>
                 </div>
+                
                 <h3 className="text-base font-medium pt-1 text-white">{ele.title}</h3>
                 <p className="text-sm text-gray-300">{ApiGenresMap(ele.genre_ids, genreMovies).join(', ')}</p>
             </div>
+            
         ))}
       </>
     )
