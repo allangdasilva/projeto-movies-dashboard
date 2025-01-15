@@ -1,10 +1,10 @@
 import axios from "axios";
 
-function ApiServices(url, setter){
+function ApiGenres(url, setter){
     return (
         axios.get(url)
         .then(response => {
-            setter(response.data.results)
+            setter(response.data.genres)
         })
         .catch(error => {
             console.error(error)
@@ -12,4 +12,4 @@ function ApiServices(url, setter){
     )
 }
 
-export default ApiServices
+export default ApiGenres

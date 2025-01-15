@@ -1,0 +1,44 @@
+import { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
+import { Popcorn } from "lucide-react"
+import axios from "axios"
+
+const apiKey = import.meta.env.VITE_API_KEY
+const moviesURL = import.meta.env.VITE_API
+const imagesURL = import.meta.env.VITE_IMG_BACKDROP
+
+function MovieCard(){
+    const {id} = useParams()
+    const [movie, setMovie] = useState([])
+
+    useEffect(()=>{
+        axios.get(`${moviesURL}${id}?language=pt-BR&${apiKey}`)
+        .then(response => setMovie(response.data))
+        .catch(error => console.log(error))
+    }, [])
+
+    return (
+        <section className="w-full max-w-screen-md min-h-screen flex flex-col gap-4 justify-center p-8">
+            <img src={imagesURL + movie.backdrop_path} alt={movie.title} 
+            className="absolute left-0 w-full h-full object-cover -z-20"/>
+            <div className="absolute left-0 w-full h-full object-cover -z-10 bg-gradient-to-t from-black to-transparent"></div>
+            <h2 className="pb-2">
+                <Link to='/' className="flex items-center gap-2 text-white">
+                    <Popcorn color="#79D7BE" /> MoviesDash
+                </Link>
+            </h2>
+            <h2 className="text-4xl font-bold text-white">{movie.title}</h2>
+            <ul className="flex items-center gap-2">
+              <li className="px-2 text-white shadow-md bg-gradient-to-t from-amber-500 to-yellow-400">
+                {movie.vote_average && movie.vote_average.toFixed(1)}
+              </li>
+              <li className="text-white">{movie.release_date && movie.release_date.substr(0,4)}</li>
+              <li className="text-white">{movie.runtime} Min</li>
+            </ul>
+            <p className="text-gray-300">{movie.overview}</p>
+            <p className="text-white">{movie.genres && movie.genres.map((genre) => genre.name).join(", ")}</p>
+        </section>
+    )
+}
+
+export default MovieCard

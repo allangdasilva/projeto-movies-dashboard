@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import axios from "axios"
 import ApiServices from "../utils/ApiServices.jsx"
+import ApiGenres from "../utils/ApiGenres.jsx"
+import ApiGenresMap from "../utils/ApiGenresMap.jsx"
 
 const apiKey = import.meta.env.VITE_API_KEY
 const imagesURL = import.meta.env.VITE_IMG
@@ -13,24 +14,8 @@ function MoviesCard({moviesEndpoint, query}) {
 
     useEffect(()=>{
         ApiServices(moviesEndpoint, setMovies)
-        getGenresMovies()
+        ApiGenres(`${genresURL}?language=pt-BR&${apiKey}`, setGenreMovies)
     },[query])
-
-    function getGenresMovies(){
-        axios.get(`${genresURL}?language=pt-BR&${apiKey}`)
-        .then(response =>{
-            setGenreMovies(response.data.genres)
-        })
-        .catch(error =>{
-            console.error(error)
-        })
-    }
-    function mapGenresIdsToName(genresIds){
-        return genresIds.map((ele)=>{
-            const genre = genreMovies.find(gen => gen.id === ele)
-            return genre ? genre.name : 'Desconhecido'
-        })
-    }
 
     return (
       <>
@@ -46,7 +31,7 @@ function MoviesCard({moviesEndpoint, query}) {
                     </div>
                 </div>
                 <h3 className="text-base font-medium pt-1 text-white">{ele.title}</h3>
-                <p className="text-sm text-gray-300">{mapGenresIdsToName(ele.genre_ids).join(', ')}</p>
+                <p className="text-sm text-gray-300">{ApiGenresMap(ele.genre_ids, genreMovies).join(', ')}</p>
             </div>
         ))}
       </>
