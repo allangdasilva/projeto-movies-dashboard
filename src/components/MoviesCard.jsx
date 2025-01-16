@@ -8,24 +8,23 @@ const apiKey = import.meta.env.VITE_API_KEY
 const imagesURL = import.meta.env.VITE_IMG_POSTER
 const genresURL = import.meta.env.VITE_GENRES
 
-function ContentCard({contentEndpoint, query, setGenres}) {
-    const [content, setContent] = useState([])
-    const [genresContent, setGenresContent] = useState([])
+function MoviesCard({moviesEndpoint, query}) {
+    const [movies, setMovies] = useState([])
+    const [genres, setGenres] = useState([])
 
     useEffect(()=>{
-        ApiServices(contentEndpoint, setContent)
-        ApiGenres(setGenres, setGenresContent)
-        console.log(content)
-    },[query, contentEndpoint, setGenres])
+        ApiServices(moviesEndpoint, setMovies)
+        ApiGenres(`${genresURL}?language=pt-BR&${apiKey}`, setGenres)
+    },[query, moviesEndpoint])
 
     return (
       <>
-        {content.length === 0 && 
+        {movies.length === 0 && 
         <div className="absolute top-0 left-0 w-full min-h-screen flex items-center justify-center">
             <div className="w-20 h-20 rounded-full border-t-2 border-teal-400 animate-spin"></div>
         </div>
         }
-        {content.length > 0 && content.map((ele)=>(
+        {movies.length > 0 && movies.map((ele)=>(
             <div key={ele.id} className="w-full flex flex-col gap-1 animate-[opacity_1s_ease] transition-all">
                 <div className="relative">
                     <Link to={`/movie/${ele.id}`}>
@@ -37,11 +36,11 @@ function ContentCard({contentEndpoint, query, setGenres}) {
                 </div>
                 
                 <h3 className="text-base font-medium pt-1 text-white">{ele.title}{ele.name}</h3>
-                <p className="text-sm text-gray-300">{ele.genre_ids && ApiGenresMap(ele.genre_ids, genresContent).join(', ')}</p>
+                <p className="text-sm text-gray-300">{ele.genre_ids && ApiGenresMap(ele.genre_ids, genres).join(', ')}</p>
             </div>
         ))}
       </>
     )
   }
   
-  export default ContentCard
+  export default MoviesCard
