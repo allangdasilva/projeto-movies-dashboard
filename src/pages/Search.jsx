@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
-import MoviesCard from '../components/MoviesCard'
+import ContentCard from '../components/MoviesCard'
 import Navbar from '../components/Navbar'
 
 const searchURL = import.meta.env.VITE_SEARCH
@@ -16,7 +16,7 @@ function Search() {
         </header>
         <main className="w-full max-w-7xl mx-auto">
           <section className="w-full grid grid-cols-1 gap-8 p-8 min-[380px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            <MoviesCard moviesEndpoint={`${searchURL}?query=${query}&language=pt-BR&${apiKey}`} query={query}/>
+            <ContentCard contentEndpoint={`${searchURL}?query=${query}&language=pt-BR&${apiKey}`} query={query}/>
           </section>
         </main>
         

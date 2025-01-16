@@ -8,14 +8,14 @@ const apiKey = import.meta.env.VITE_API_KEY
 const imagesURL = import.meta.env.VITE_IMG_POSTER
 const genresURL = import.meta.env.VITE_GENRES
 
-function MoviesCard({moviesEndpoint, query}) {
+function ContentCard({contentEndpoint, query}) {
     const [movies, setMovies] = useState([])
     const [genreMovies, setGenreMovies] = useState([])
 
     useEffect(()=>{
-        ApiServices(moviesEndpoint, setMovies)
+        ApiServices(contentEndpoint, setMovies)
         ApiGenres(`${genresURL}?language=pt-BR&${apiKey}`, setGenreMovies)
-    },[query])
+    },[query, contentEndpoint])
 
     return (
       <>
@@ -43,4 +43,4 @@ function MoviesCard({moviesEndpoint, query}) {
     )
   }
   
-  export default MoviesCard
+  export default ContentCard

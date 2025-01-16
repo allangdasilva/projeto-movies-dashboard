@@ -4,7 +4,7 @@ import { Popcorn, ChevronLeft } from "lucide-react"
 import axios from "axios"
 
 const apiKey = import.meta.env.VITE_API_KEY
-const moviesURL = import.meta.env.VITE_API
+const moviesURL = import.meta.env.VITE_API_MOVIES
 const imagesURL = import.meta.env.VITE_IMG_BACKDROP
 
 function MovieCard(){
