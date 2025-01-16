@@ -11,7 +11,6 @@ const genresURL = import.meta.env.VITE_GENRES
 function MoviesCard({moviesEndpoint, query}) {
     const [movies, setMovies] = useState([])
     const [genreMovies, setGenreMovies] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(()=>{
         ApiServices(moviesEndpoint, setMovies)
