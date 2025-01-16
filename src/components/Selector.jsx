@@ -3,8 +3,11 @@ import { useState } from "react"
 const apiKey = import.meta.env.VITE_API_KEY
 const moviesURL = import.meta.env.VITE_API_MOVIES
 const seriesURL = import.meta.env.VITE_API_SERIES
+const genresURL = import.meta.env.VITE_GENRES
+const genresSeriesURL = import.meta.env.VITE_GENRES_SERIES
 
-function Selector({setContent}){
+
+function Selector({setContent, setGenres}){
     const [background, setBackground] = useState(true)
 
     return (
@@ -12,6 +15,7 @@ function Selector({setContent}){
             <li className={`px-2 py-1 cursor-pointer text-white ${background ? 'text-teal-800 bg-white' : ''} transition-all duration-1000`} 
             onClick={()=> {
               setContent(`${moviesURL}popular?language=pt-BR&${apiKey}`)
+              setGenres(`${genresURL}?language=pt-BR&${apiKey}`)
               setBackground(true)
               }
             }>
@@ -20,6 +24,7 @@ function Selector({setContent}){
             <li className={`px-2 py-1 cursor-pointer text-white ${!background ? 'text-teal-800 bg-white' : ''} transition-all duration-1000`} 
             onClick={()=> {
               setContent(`${seriesURL}popular?language=pt-BR&${apiKey}`)
+              setGenres(`${genresSeriesURL}?language=pt-BR&${apiKey}`)
               setBackground(!background)
               }
             }>
