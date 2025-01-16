@@ -11,6 +11,7 @@ const genresURL = import.meta.env.VITE_GENRES
 function MoviesCard({moviesEndpoint, query}) {
     const [movies, setMovies] = useState([])
     const [genreMovies, setGenreMovies] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(()=>{
         ApiServices(moviesEndpoint, setMovies)
@@ -25,7 +26,7 @@ function MoviesCard({moviesEndpoint, query}) {
         </div>
         }
         {movies.length > 0 && movies.map((ele)=>(
-            <div key={ele.id} className="w-full flex flex-col gap-1">
+            <div key={ele.id} className="w-full flex flex-col gap-1 animate-[opacity_1s_ease] transition-all">
                 <div className="relative">
                     <Link to={`/movie/${ele.id}`}>
                         <img src={imagesURL + ele.poster_path} alt={ele.title} className="shadow-xl" />
@@ -38,7 +39,6 @@ function MoviesCard({moviesEndpoint, query}) {
                 <h3 className="text-base font-medium pt-1 text-white">{ele.title}</h3>
                 <p className="text-sm text-gray-300">{ApiGenresMap(ele.genre_ids, genreMovies).join(', ')}</p>
             </div>
-            
         ))}
       </>
     )

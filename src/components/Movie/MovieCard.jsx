@@ -45,7 +45,7 @@ function MovieCard(){
             </div>
             }
             <img src={imagesURL + movie.backdrop_path} alt={movie.title} 
-            className="absolute top-0 left-0 w-full h-full object-cover -z-20"
+            className={`absolute top-0 left-0 w-full h-full object-cover -z-20 ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000`}
             onLoad={()=> setIsLoading(false)}/>
             <div className="absolute left-0 w-full h-full object-cover -z-10 bg-gradient-to-t from-black to-transparent"></div>
         </section>
