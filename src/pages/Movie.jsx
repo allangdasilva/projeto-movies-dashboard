@@ -1,5 +1,4 @@
 import MovieCard from "../components/Movie/MovieCard.jsx"
-import Navbar from "../components/Navbar.jsx"
 
 function Movie() {
     return (

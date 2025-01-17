@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { Popcorn, ChevronLeft } from "lucide-react"
+import { Popcorn, ArrowBigLeft } from "lucide-react"
 import axios from "axios"
 
 const apiKey = import.meta.env.VITE_API_KEY
@@ -10,6 +10,7 @@ const imagesURL = import.meta.env.VITE_IMG_BACKDROP
 function MovieCard(){
     const {id} = useParams()
     const [movie, setMovie] = useState([])
+    const [movieVideo, setMovieVideo] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate()
 
@@ -17,14 +18,24 @@ function MovieCard(){
         axios.get(`${moviesURL}${id}?language=pt-BR&${apiKey}`)
         .then(response => setMovie(response.data))
         .catch(error => console.log(error))
+
+        getMovieVideo()
     }, [])
+
+    function getMovieVideo(){
+        axios.get(`${moviesURL}${id}/videos?language=pt-BR&${apiKey}`)
+        .then(response => {
+            setMovieVideo(response.data.results)
+        })
+        .catch(error => console.log(error))
+    }
 
     return (
 
         <section className="w-full max-w-screen-md min-h-screen flex flex-col gap-4 justify-center p-8">
             <h2>
-                <button onClick={()=> navigate(-1)} className="flex items-center gap-2 max-w-max break-all text-white">
-                    <ChevronLeft color="#F9F9F9" /> <Popcorn color="#79D7BE" /> MoviesDash 
+                <button onClick={()=> navigate(-1)} className="flex flex-wrap items-center gap-2 max-w-max break-all text-lg text-white">
+                    <ArrowBigLeft color="#F9F9F9" /> <Popcorn color="#79D7BE" size={28} /> MoviesDash 
                 </button>
             </h2>
             <h2 className="text-4xl font-bold break-words text-white">{movie.title}</h2>

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import ApiServices from "../utils/ApiServices.jsx"
-import ApiGenres from "../utils/ApiGenres.jsx"
-import ApiGenresMap from "../utils/ApiGenresMap.jsx"
+import axios from "axios"
 
 const apiKey = import.meta.env.VITE_API_KEY
 const imagesURL = import.meta.env.VITE_IMG_POSTER
@@ -13,9 +11,21 @@ function MoviesCard({moviesEndpoint, query}) {
     const [genres, setGenres] = useState([])
 
     useEffect(()=>{
-        ApiServices(moviesEndpoint, setMovies)
-        ApiGenres(`${genresURL}?language=pt-BR&${apiKey}`, setGenres)
+        axios.get(moviesEndpoint)
+        .then(response => setMovies(response.data.results))
+        .catch(error => console.error(error))
+
+        axios.get(`${genresURL}?language=pt-BR&${apiKey}`)
+        .then(response => setGenres(response.data.genres))
+        .catch(error => console.error(error))
     },[query, moviesEndpoint])
+
+    function ApiGenresMap(genresIds, genres){
+        return genresIds.map((ele) => {
+            const genre = genres.find(g => g.id === ele);
+            return genre ? genre.name : 'Desconhecido';
+        });
+    }
 
     return (
       <>
