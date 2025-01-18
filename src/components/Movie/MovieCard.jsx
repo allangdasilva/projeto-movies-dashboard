@@ -49,6 +49,10 @@ function MovieCard(){
             <p className="text-gray-300">{movie.overview}</p>
             <p className="text-white">{movie.genres && movie.genres.map((genre) => genre.name).join(", ")}</p>
 
+            <div className="text-white">{movieVideo.map((ele)=>(
+                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${ele.key}`} title={`${ele.name}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen key={ele.id}></iframe>
+            ))}</div>
+
             {
             isLoading && 
             <div className="absolute top-0 left-0 w-full min-h-screen flex items-center justify-center pointer-events-none">
