@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { Heart } from "lucide-react"
 import axios from "axios"
 
 const apiKey = import.meta.env.VITE_API_KEY
@@ -26,6 +27,9 @@ function MoviesCard({moviesEndpoint, query}) {
             return genre ? genre.name : 'Desconhecido';
         });
     }
+    function getLocalStorage(id){
+        localStorage.setItem("movieId", JSON.stringify(id))
+    }
 
     return (
       <>
@@ -43,6 +47,10 @@ function MoviesCard({moviesEndpoint, query}) {
                     <div className="absolute -right-4 bottom-4 w-8 h-8 flex items-center justify-center rounded-full shadow-xl bg-gradient-to-t from-amber-500 to-yellow-400">
                         <p className="text-sm font-medium text-white">{ele.vote_average && ele.vote_average.toFixed(1)}</p>
                     </div>
+                    <Link to='/favorites' className="absolute top-4 -right-4 flex items-center justify-center w-8 h-8 rounded-full bg-red-500"
+                    onClick={()=> getLocalStorage(ele.id)}>
+                        <Heart />
+                    </Link>
                 </div>
                 
                 <h3 className="text-base font-medium pt-1 text-white">{ele.title}{ele.name}</h3>
