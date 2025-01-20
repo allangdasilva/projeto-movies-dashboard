@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { Popcorn, ArrowBigLeft } from "lucide-react"
+import { LuArrowBigLeft } from "react-icons/lu"
+import { PiPopcornDuotone } from "react-icons/pi"
 import axios from "axios"
 
 const apiKey = import.meta.env.VITE_API_KEY
@@ -36,7 +37,7 @@ function MovieCard(){
             <div className="w-full flex flex-col gap-4 justify-center">
                 <h2>
                     <button onClick={()=> navigate(-1)} className="flex flex-wrap items-center gap-2 max-w-max break-all text-lg text-white">
-                        <ArrowBigLeft color="#F9F9F9" /> <Popcorn color="#79D7BE" size={28} /> MoviesDash 
+                        <LuArrowBigLeft color="#F9F9F9" size={26} /> <PiPopcornDuotone color="#79D7BE" size={28} /> MoviesDash 
                     </button>
                 </h2>
                 <h2 className="text-4xl font-bold break-words text-white">{movie.title}</h2>
